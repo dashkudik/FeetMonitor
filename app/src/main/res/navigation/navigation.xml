@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/fragment_home"
+    android:id="@+id/navigation">
+
+    <fragment
+        android:name="com.example.feetmonitor.ConnectionFragment"
+        android:label="Connection"
+        android:id="@+id/fragment_connection">
+    </fragment>
+
+    <fragment
+        android:name="com.example.feetmonitor.HomeFragment"
+        android:label="Home"
+        android:id="@+id/fragment_home">
+    </fragment>
+
+    <fragment
+        android:name="com.example.feetmonitor.StatsFragment"
+        android:label="Statistics"
+        android:id="@+id/fragment_stats">
+    </fragment>
+
+    <fragment
+        android:name="com.example.feetmonitor.SettingsFragment"
+        android:label="Settings"
+        android:id="@+id/fragment_settings">
+    </fragment>
+
+</navigation>
