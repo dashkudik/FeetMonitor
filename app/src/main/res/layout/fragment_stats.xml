@@ -4,67 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StatsFragment">
+    tools:context="dashkudov.feetmonitor.presentation.fragments.StatsFragment">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    </androidx.core.widget.NestedScrollView>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/seekBarX" />
-
-        <SeekBar
-            android:id="@+id/seekBarY"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="8dp"
-            android:layout_toLeftOf="@+id/tvYMax"
-            android:layout_marginRight="5dp"
-            android:max="150"
-            android:paddingBottom="12dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarX"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/seekBarY"
-            android:layout_margin="8dp"
-            android:layout_marginBottom="35dp"
-            android:layout_toLeftOf="@+id/tvXMax"
-            android:layout_marginRight="5dp"
-            android:max="500"
-            android:paddingBottom="12dp" />
-
-        <TextView
-            android:id="@+id/tvXMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBarX"
-            android:layout_alignParentRight="true"
-            android:text="@string/dash"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvYMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBarY"
-            android:layout_alignParentRight="true"
-            android:text="@string/dash"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
-
+            android:layout_height="match_parent">
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="3:2"
+                android:layout_margin="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

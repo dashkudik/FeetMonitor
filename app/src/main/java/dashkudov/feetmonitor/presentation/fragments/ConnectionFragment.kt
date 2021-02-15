@@ -1,12 +1,14 @@
-package com.example.feetmonitor
+package dashkudov.feetmonitor.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import com.example.feetmonitor.R
 
-class SettingsFragment : Fragment() {
+
+class ConnectionFragment : Fragment() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -15,6 +17,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_settings, container, false)
+    ) = inflater.inflate(R.layout.fragment_connection, container, false)
+
 
 }

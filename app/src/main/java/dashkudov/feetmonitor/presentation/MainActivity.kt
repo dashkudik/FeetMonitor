@@ -1,11 +1,10 @@
-package com.example.feetmonitor
+package dashkudov.feetmonitor.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.example.feetmonitor.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
