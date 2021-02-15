@@ -21,7 +21,7 @@ class StatsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         LineChartDrawer(this).show(
-            GetActualChartDataUseCase().execute({},{})
+            GetActualChartDataUseCase().execute()
         )
 
     }

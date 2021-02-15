@@ -19,6 +19,8 @@ import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import dashkudov.feetmonitor.Constants
+import dashkudov.feetmonitor.Constants.DEFAULT_START_VALUE
 import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.data.objects.foot.BottomFootPart
 import dashkudov.feetmonitor.data.objects.foot.FootPart
@@ -34,50 +36,21 @@ class LineChartDrawer(private val fragment: StatsFragment): OnChartValueSelected
             LineChartUtils.Styler.styleChart(chart)
             chart.data = createLineDataFromChartData(data)
 
-            /*val values = ArrayList<Entry>().apply {
-
-            }
-            (0..15).forEach {
-                val randomValue = (Math.random() * 20).toFloat() + 50
-                values.add(Entry(it.toFloat(), randomValue, null))
-            }
-            val set1: LineDataSet
-            if (chart.data != null &&
-                chart.data.dataSetCount > 0
-            ) {
-                set1 = chart.data.getDataSetByIndex(0) as LineDataSet
-                set1.values = values
-                set1.notifyDataSetChanged()
-                chart.data.notifyDataChanged()
-                chart.notifyDataSetChanged()
-            } else {
-                // create a dataset and give it a type
-                set1 = LineDataSet(values, "Давление пятки")
-
-                val dataSets = ArrayList<ILineDataSet>()
-                dataSets.add(set1) // add the data sets
-
-                // create a data object with the data sets
-                val data = LineData(dataSets)
-
-                // set data
-                chart.data = data
-
-            } */
         }
     }
 
     fun createLineDataFromChartData(data: ChartData): LineData {
-        var i = -1
+        var i = DEFAULT_START_VALUE
         return LineData(
             LineDataSet(data.bottomFootPartDataSet.dataSet.map { Entry().apply { y = it; x = (++i).toFloat() } }, BottomFootPart.CHART_DESCRIPTION).apply {
                 LineChartUtils.Styler.styleDataSet(this, BottomFootPart())
-            }.also { i = -1 },
+            }.also { i = DEFAULT_START_VALUE },
             LineDataSet(data.internalFootPartDataSet.dataSet.map { Entry().apply { y = it; x = (++i).toFloat() } }, InternalFootPart.CHART_DESCRIPTION).apply {
                 LineChartUtils.Styler.styleDataSet(this, InternalFootPart())
             }
         )
     }
+
     override fun onValueSelected(e: Entry, h: Highlight?) {}
     override fun onNothingSelected() {}
 }

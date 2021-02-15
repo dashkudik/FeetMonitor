@@ -2,33 +2,22 @@ package dashkudov.feetmonitor.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.example.feetmonitor.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val navController
-        by lazy { Navigation.findNavController(this, R.id.fragment_host) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        with(nav_view) {
-            setupWithNavController(navController)
-            setOnNavigationItemSelectedListener { item ->
-                with(navController) {
-                    when (item.itemId) {
-                        R.id.item_home -> navigate(R.id.fragment_home)
-                        R.id.item_bluetooth_connection -> navigate(R.id.fragment_connection)
-                        R.id.item_settings -> navigate(R.id.fragment_settings)
-                        R.id.item_stats -> navigate(R.id.fragment_stats)
-                    }
-                }
-                true
-            }
-            selectedItemId = R.id.item_home
-        }
+        nav_view.setupWithNavController((fragment_host as NavHostFragment).navController)
     }
 }

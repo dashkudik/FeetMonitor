@@ -1,11 +1,14 @@
 package dashkudov.feetmonitor.domain.usecase
 
+import dashkudov.feetmonitor.Constants
+import dashkudov.feetmonitor.Constants.CHART_ENTRIES_AMOUNT
+import dashkudov.feetmonitor.Constants.DEFAULT_START_VALUE
 import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.data.objects.foot.BottomFootPart
 import dashkudov.feetmonitor.data.objects.foot.InternalFootPart
 
 class GetActualChartDataUseCase: UseCase<ChartData>() {
-    fun execute(onComplete: () -> Unit, onError: () -> Unit): ChartData {
+    fun execute(): ChartData {
         return ChartData(
             BottomFootPart().apply {
                 dataSet = generateRandomList()
@@ -18,7 +21,7 @@ class GetActualChartDataUseCase: UseCase<ChartData>() {
 
     private fun generateRandomList(): List<Float> {
         return ArrayList<Float>().apply {
-            (0..12).forEach {
+            (0 until CHART_ENTRIES_AMOUNT).forEach {
                 val randomValue = (Math.random() * 70).toFloat() + 60
                 add(randomValue)
             }
