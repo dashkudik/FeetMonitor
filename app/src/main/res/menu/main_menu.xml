@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/icon_connection"
+        android:id="@+id/item_connection"
+        android:title="Connection" />
+    <item
+        android:icon="@drawable/icon_home"
+        android:id="@+id/item_home"
+        android:title="Home" />
+    <item
+        android:icon="@drawable/icon_stats"
+        android:id="@+id/item_stats"
+        android:title="Statistics" />
+    <item
+        android:icon="@drawable/icon_settings"
+        android:id="@+id/item_settings"
+        android:title="Settings" />
+</menu>
