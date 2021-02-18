@@ -7,28 +7,28 @@
 
     <fragment
         tools:layout="@layout/fragment_connection"
-        android:name="dashkudov.feetmonitor.presentation.fragments.ConnectionFragment"
+        android:name="dashkudov.feetmonitor.presentation.fragments.connection.ConnectionFragment"
         android:label="Connection"
         android:id="@+id/fragment_connection">
     </fragment>
 
     <fragment
         tools:layout="@layout/fragment_home"
-        android:name="dashkudov.feetmonitor.presentation.fragments.HomeFragment"
+        android:name="dashkudov.feetmonitor.presentation.fragments.home.HomeFragment"
         android:label="Home"
         android:id="@+id/fragment_home">
     </fragment>
 
     <fragment
         tools:layout="@layout/fragment_stats"
-        android:name="dashkudov.feetmonitor.presentation.fragments.StatsFragment"
+        android:name="dashkudov.feetmonitor.presentation.fragments.stats.StatsFragment"
         android:label="Statistics"
         android:id="@+id/fragment_stats">
     </fragment>
 
     <fragment
         tools:layout="@layout/fragment_settings"
-        android:name="dashkudov.feetmonitor.presentation.fragments.SettingsFragment"
+        android:name="dashkudov.feetmonitor.presentation.fragments.settings.SettingsFragment"
         android:label="Settings"
         android:id="@+id/fragment_settings">
     </fragment>

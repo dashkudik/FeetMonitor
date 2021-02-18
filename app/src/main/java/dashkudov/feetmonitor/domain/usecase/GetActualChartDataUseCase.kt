@@ -1,14 +1,15 @@
 package dashkudov.feetmonitor.domain.usecase
 
-import dashkudov.feetmonitor.Constants
 import dashkudov.feetmonitor.Constants.CHART_ENTRIES_AMOUNT
-import dashkudov.feetmonitor.Constants.DEFAULT_START_VALUE
 import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.data.objects.foot.BottomFootPart
 import dashkudov.feetmonitor.data.objects.foot.InternalFootPart
+import javax.inject.Inject
 
-class GetActualChartDataUseCase: UseCase<ChartData>() {
-    fun execute(): ChartData {
+class GetActualChartDataUseCase @Inject constructor(
+
+) : UseCase<ChartData>() {
+    override suspend fun executeOnBackground(): ChartData {
         return ChartData(
             BottomFootPart().apply {
                 dataSet = generateRandomList()

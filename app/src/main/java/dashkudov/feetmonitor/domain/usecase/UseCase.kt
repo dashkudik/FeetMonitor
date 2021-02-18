@@ -1,42 +1,54 @@
 package dashkudov.feetmonitor.domain.usecase
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import kotlin.reflect.KProperty
 
 abstract class UseCase<T> {
+    private val backgroundContext = IO
+    protected abstract suspend fun executeOnBackground(): T
 
-    abstract fun execute(): T
+    fun execute(block: ExecutingHandler<T>.() -> Unit) {
+        val handler = ExecutingHandler<T>().apply {
+            this.block()
+        }
+        CoroutineScope(backgroundContext).launch {
+            Log.i("USE CASE LOGGER::::", "ON START")
+            try {
+                val result = executeOnBackground()
+                handler.onComplete(result)
+                Log.i("USE CASE LOGGER::::", "ON COMPLETE")
+            } catch (e: Exception) {
+                handler.onFail(e)
+                Log.i("USE CASE LOGGER::::", "ON FAIL")
+            } finally {
+                handler.onStop()
+                Log.i("USE CASE LOGGER::::", "ON STOP")
+            }
+        }
+    }
 
-
-
-    protected class ExecutingHandler<T> : State<T> {
-        override var onStart = {}
-        override var onComplete = { result: T -> }
-        override var onStop = {}
-        override var onFail = { e: Exception -> }
+    class ExecutingHandler<T> {
+        var onStart = {}
+        var onComplete = { result: T -> }
+        var onStop = {}
+        var onFail = { e: Exception -> }
 
         fun onStart(block: () -> Unit) {
             onStart = block
         }
+
         fun onComplete(block: (T) -> Unit) {
             onComplete = block
         }
+
         fun onStop(block: () -> Unit) {
             onStop = block
         }
-        fun onFail(block: (e: Exception) -> Unit) {
+
+        fun onFail(block: (Exception) -> Unit) {
             onFail = block
         }
     }
-
-    private interface State<T> {
-        var onStart: () -> Unit
-        var onComplete: (T) -> Unit
-        var onStop: () -> Unit
-        var onFail: (e: Exception) -> Unit
-    }
-
 }
