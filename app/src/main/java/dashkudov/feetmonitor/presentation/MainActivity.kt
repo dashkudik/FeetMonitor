@@ -1,5 +1,6 @@
 package dashkudov.feetmonitor.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -17,6 +18,10 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         nav_view.setupWithNavController((fragment_host as NavHostFragment).navController)
+
+        val intent = Intent(this, MonitorService::class.java)
+        startService(intent)
     }
 }

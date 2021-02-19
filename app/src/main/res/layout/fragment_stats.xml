@@ -22,7 +22,22 @@
                 app:layout_constraintDimensionRatio="3:2"
                 android:layout_margin="12dp"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/stats_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chart">
+
+                <include layout="@layout/view_stats" />
+
+                <include layout="@layout/view_stats" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

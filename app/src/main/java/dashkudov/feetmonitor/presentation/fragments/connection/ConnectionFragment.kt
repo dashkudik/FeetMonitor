@@ -10,7 +10,7 @@ class ConnectionFragment : AbstractFragment<ConnectionViewModel>(R.layout.fragme
         createViewModel<ConnectionViewModel>()
     }
 
-    override fun prepareBlock() {
+    override fun fragmentBlock() {
 
     }
 
