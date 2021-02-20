@@ -1,9 +1,10 @@
-package dashkudov.feetmonitor.di
+package dashkudov.feetmonitor.di.modules
 
 import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dashkudov.feetmonitor.FeetMonitorApp
+import dashkudov.feetmonitor.di.ViewModelBuilder
 import javax.inject.Singleton
 
 @Module(includes = [ViewModelBuilder::class])

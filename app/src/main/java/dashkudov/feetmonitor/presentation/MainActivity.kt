@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

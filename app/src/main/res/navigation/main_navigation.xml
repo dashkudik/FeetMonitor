@@ -6,13 +6,6 @@
     android:id="@+id/navigation">
 
     <fragment
-        tools:layout="@layout/fragment_connection"
-        android:name="dashkudov.feetmonitor.presentation.fragments.connection.ConnectionFragment"
-        android:label="Connection"
-        android:id="@+id/fragment_connection">
-    </fragment>
-
-    <fragment
         tools:layout="@layout/fragment_home"
         android:name="dashkudov.feetmonitor.presentation.fragments.home.HomeFragment"
         android:label="Home"
@@ -20,10 +13,10 @@
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_stats"
-        android:name="dashkudov.feetmonitor.presentation.fragments.stats.StatsFragment"
+        tools:layout="@layout/fragment_statistics"
+        android:name="dashkudov.feetmonitor.presentation.fragments.stats.StatisticsFragment"
         android:label="Statistics"
-        android:id="@+id/fragment_stats">
+        android:id="@+id/fragment_statistics">
     </fragment>
 
     <fragment

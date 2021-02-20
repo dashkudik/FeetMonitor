@@ -9,7 +9,6 @@ import com.example.feetmonitor.R
 import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
-
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
 

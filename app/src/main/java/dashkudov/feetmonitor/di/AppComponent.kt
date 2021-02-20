@@ -6,6 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import dashkudov.feetmonitor.FeetMonitorApp
+import dashkudov.feetmonitor.di.modules.ContextModule
 import javax.inject.Singleton
 
 @Singleton

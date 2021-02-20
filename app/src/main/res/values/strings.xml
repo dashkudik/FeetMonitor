@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">FeetMonitor</string>
     <string name="dash">-</string>
+    <string name="connection">Connection</string>
+    <string name="home">Home</string>
+    <string name="statistics">Statistics</string>
+    <string name="settings">Settings</string>
 </resources>

@@ -19,12 +19,12 @@ abstract class AbstractFragment<T : ViewModel> constructor(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    abstract val viewModel: T
-    abstract fun fragmentBlock()
-    abstract fun T.observeBlock()
-    abstract fun T.processBlock()
+    protected abstract val viewModel: T
+    protected abstract fun fragmentBlock()
+    protected abstract fun T.observeBlock()
+    protected abstract fun T.processBlock()
 
-    inline fun <reified T : ViewModel> createViewModel(): T {
+    protected inline fun <reified T : ViewModel> createViewModel(): T {
         return viewModelFactory.create(T::class.javaObjectType)
     }
 

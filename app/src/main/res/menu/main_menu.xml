@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:icon="@drawable/icon_connection"
-        android:id="@+id/fragment_connection"
-        android:title="Connection" />
-    <item
-        android:icon="@drawable/icon_home"
-        android:id="@+id/fragment_home"
-        android:title="Home" />
-    <item
-        android:icon="@drawable/icon_stats"
-        android:id="@+id/fragment_stats"
-        android:title="Statistics" />
-    <item
-        android:icon="@drawable/icon_settings"
-        android:id="@+id/fragment_settings"
-        android:title="Settings" />
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/icon_home"
+            android:id="@+id/fragment_home"
+            android:title="@string/home" />
+        <item
+            android:icon="@drawable/icon_statistics"
+            android:id="@+id/fragment_statistics"
+            android:title="@string/statistics" />
+        <item
+            android:icon="@drawable/icon_settings"
+            android:id="@+id/fragment_settings"
+            android:title="@string/settings" />
+    </group>
+
 </menu>

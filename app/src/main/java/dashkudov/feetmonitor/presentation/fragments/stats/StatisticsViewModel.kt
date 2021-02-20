@@ -6,7 +6,7 @@ import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.domain.usecase.GetActualChartDataUseCase
 import javax.inject.Inject
 
-class StatsViewModel @Inject constructor(
+class StatisticsViewModel @Inject constructor(
     private val getActualChartDataUseCase: GetActualChartDataUseCase
 ) : ViewModel() {
     val mActualChartData = MutableLiveData<ChartData>()

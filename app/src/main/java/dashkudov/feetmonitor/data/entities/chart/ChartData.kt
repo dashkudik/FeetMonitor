@@ -4,5 +4,6 @@ import dashkudov.feetmonitor.data.objects.foot.DataSet
 
 data class ChartData(
     val bottomFootPartDataSet: DataSet,
-    val internalFootPartDataSet: DataSet
+    val internalFootPartDataSet: DataSet,
+    val externalFootPartDataSet: DataSet
 )

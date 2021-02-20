@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="dashkudov.feetmonitor.presentation.fragments.stats.StatsFragment">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,30 +13,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include layout="@layout/view_chart_header" />
+
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_header_chart"
                 app:layout_constraintDimensionRatio="3:2"
-                android:layout_margin="12dp"
+                android:layout_marginHorizontal="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/stats_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chart">
-
-                <include layout="@layout/view_stats" />
-
-                <include layout="@layout/view_stats" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
+            <include layout="@layout/view_statistics_header"/>
+            <include layout="@layout/view_statistics"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>
