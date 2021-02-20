@@ -6,14 +6,13 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 abstract class UseCase<T> {
-    private val backgroundContext = IO
     protected abstract suspend fun executeOnBackground(): T
 
     fun execute(block: ExecutingHandler<T>.() -> Unit) {
         val handler = ExecutingHandler<T>().apply {
             this.block()
         }
-        CoroutineScope(backgroundContext).launch {
+        CoroutineScope(IO).launch {
             Log.i("USE CASE LOGGER::::", "ON START")
             try {
                 val result = executeOnBackground()

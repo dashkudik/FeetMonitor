@@ -2,7 +2,6 @@
 <androidx.appcompat.widget.AppCompatTextView
     android:layout_weight="1"
     android:id="@+id/header_statistics_all_time"
-    android:paddingBottom="6dp"
     android:gravity="center"
     android:lines="1"
     android:text="За все время"
