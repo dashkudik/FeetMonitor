@@ -3,7 +3,6 @@ package dashkudov.feetmonitor.di
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
-import dashkudov.feetmonitor.presentation.ViewModelFactory
 
 @Module(
     includes = [

@@ -18,6 +18,8 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         nav_view.setupWithNavController((fragment_host as NavHostFragment).navController)
 
         val intent = Intent(this, MonitorService::class.java)

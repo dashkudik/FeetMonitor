@@ -1,6 +1,5 @@
 package dashkudov.feetmonitor.domain.usecase
 
-import dashkudov.feetmonitor.Constants.CHART_ENTRIES_AMOUNT
 import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.data.objects.foot.BottomFootPart
 import dashkudov.feetmonitor.data.objects.foot.ExternalFootPart
@@ -8,26 +7,28 @@ import dashkudov.feetmonitor.data.objects.foot.InternalFootPart
 import dashkudov.feetmonitor.domain.repository.AppRepository
 import javax.inject.Inject
 
-class GetActualChartDataUseCase @Inject constructor(
+class GetLastChartDataUseCase @Inject constructor(
     private val repository: AppRepository
 ) : UseCase<ChartData>() {
+    var minutes: Int? = null
+
     override suspend fun executeOnBackground(): ChartData {
         return ChartData(
             BottomFootPart().apply {
-                dataSet = generateRandomList()
+                dataSet = generateRandomList(minutes!!)
             },
             InternalFootPart().apply {
-                dataSet = generateRandomList()
+                dataSet = generateRandomList(minutes!!)
             },
             ExternalFootPart().apply {
-                dataSet = generateRandomList()
+                dataSet = generateRandomList(minutes!!)
             }
         )
     }
 
-    private fun generateRandomList(): List<Float> {
+    private fun generateRandomList(minutes: Int): List<Float> {
         return ArrayList<Float>().apply {
-            (0 until CHART_ENTRIES_AMOUNT).forEach {
+            (0 until minutes * 60).forEach {
                 val randomValue = (Math.random() * 90).toFloat() + 70
                 add(randomValue)
             }

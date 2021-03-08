@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        style="@style/Widget.MaterialComponents.ActionBar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_orange"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="?colorOnPrimary" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_bluetooth_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackground"
+        android:paddingVertical="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="10dp"
+        android:src="@drawable/icon_bluetooth_connection_success" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/btn_bluetooth_connection"
+        android:background="?selectableItemBackground"
+        android:padding="5dp"
+        android:src="@drawable/icon_connection_success" />
+</RelativeLayout>

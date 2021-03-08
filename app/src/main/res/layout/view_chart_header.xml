@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatTextView
     android:layout_marginTop="20dp"
-    android:paddingBottom="10dp"
+    android:fontFamily="@font/montserrat_extra_bold"
     android:id="@+id/tv_header_chart"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/chart"

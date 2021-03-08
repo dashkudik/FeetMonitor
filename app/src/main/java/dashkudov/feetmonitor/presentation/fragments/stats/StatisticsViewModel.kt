@@ -9,7 +9,9 @@ import javax.inject.Inject
 class StatisticsViewModel @Inject constructor(
     private val getActualChartDataUseCase: GetActualChartDataUseCase
 ) : ViewModel() {
-    val mActualChartData = MutableLiveData<ChartData>()
+    val mActualChartData by lazy {
+        MutableLiveData<ChartData>()
+    }
 
     fun getActualChartData() {
         getActualChartDataUseCase.execute {

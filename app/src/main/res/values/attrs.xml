@@ -1,0 +1,15 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingsButton">
+        <attr name="android:icon" />
+        <attr name="android:text" />
+        <attr name="selectedHint" format="string|reference" />
+        <attr name="dividerMarginStart" format="dimension|reference" />
+        <attr name="visibleRightArrow" format="boolean|reference" />
+    </declare-styleable>
+
+</resources>

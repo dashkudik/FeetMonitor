@@ -1,4 +1,4 @@
-package dashkudov.feetmonitor.presentation
+package dashkudov.feetmonitor.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

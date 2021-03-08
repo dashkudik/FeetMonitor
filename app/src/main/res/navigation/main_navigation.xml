@@ -17,13 +17,20 @@
         android:name="dashkudov.feetmonitor.presentation.fragments.stats.StatisticsFragment"
         android:label="Statistics"
         android:id="@+id/fragment_statistics">
+        <action
+            android:id="@+id/action_fragment_statistics_to_fragment_full_chart"
+            app:destination="@id/fragment_full_chart" />
     </fragment>
 
     <fragment
         tools:layout="@layout/fragment_settings"
         android:name="dashkudov.feetmonitor.presentation.fragments.settings.SettingsFragment"
         android:label="Settings"
-        android:id="@+id/fragment_settings">
-    </fragment>
+        android:id="@+id/fragment_settings"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_full_chart"
+        android:name="dashkudov.feetmonitor.presentation.fragments.full_chart.FullChartFragment"
+        tools:layout="@layout/fragment_full_chart"></fragment>
 
 </navigation>

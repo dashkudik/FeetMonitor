@@ -12,9 +12,13 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        ContextModule::class, ActivityBuilder::class, AndroidSupportInjectionModule::class
+        ContextModule::class,
+        ActivityBuilder::class,
+        AndroidSupportInjectionModule::class,
+        RepositoryBuilder::class
     ]
 )
+
 interface AppComponent : AndroidInjector<FeetMonitorApp> {
     @Component.Builder
     interface Builder {

@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeetMonitor">
+        <activity
+            android:name="dashkudov.feetmonitor.presentation.FullChartActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.FeetMonitor.Fullscreen" />
         <activity android:name="dashkudov.feetmonitor.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

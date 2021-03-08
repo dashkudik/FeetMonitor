@@ -1,10 +1,13 @@
 package dashkudov.feetmonitor.presentation.fragments.stats
 
+import android.content.Intent
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.example.feetmonitor.R
+import dashkudov.feetmonitor.presentation.FullChartActivity
+import dashkudov.feetmonitor.presentation.custom.ChartDrawer
 import dashkudov.feetmonitor.presentation.fragments.AbstractFragment
-import dashkudov.feetmonitor.presentation.util.LineChartDrawer
+import kotlinx.android.synthetic.main.fragment_statistics.*
 
 
 class StatisticsFragment : AbstractFragment<StatisticsViewModel>(R.layout.fragment_statistics) {
@@ -13,22 +16,6 @@ class StatisticsFragment : AbstractFragment<StatisticsViewModel>(R.layout.fragme
     }
 
     override fun fragmentBlock() {
-        /* view?.findViewById<LinearLayoutCompat>(R.id.stats_container)?.apply {
-            (getChildAt(1).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Шаги: "
-            (getChildAt(2).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Предупреждения: "
-            (getChildAt(3).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Среднее давление пятки: "
-            (getChildAt(4).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Среднее давление внутренней части стопы: "
-            (getChildAt(5).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Среднее давление внешней части стопы: "
-            (getChildAt(6).findViewById<AppCompatTextView>(R.id.stats_label)).text = "Время в состоянии соединения: "
-
-            (getChildAt(1).findViewById<AppCompatTextView>(R.id.stats_value)).text = "8346"
-            (getChildAt(2).findViewById<AppCompatTextView>(R.id.stats_value)).text = "2"
-            (getChildAt(3).findViewById<AppCompatTextView>(R.id.stats_value)).text = "36"
-            (getChildAt(4).findViewById<AppCompatTextView>(R.id.stats_value)).text = "25"
-            (getChildAt(5).findViewById<AppCompatTextView>(R.id.stats_value)).text = "44"
-            (getChildAt(6).findViewById<AppCompatTextView>(R.id.stats_value)).text = "15 часов 46 минут"
-        } */
-
         view?.findViewById<LinearLayoutCompat>(R.id.container_criteria_list)?.apply {
             (getChildAt(1) as AppCompatTextView).text = "Шаги"
             (getChildAt(2) as AppCompatTextView).text = "Предупреждения заболеваний"
@@ -56,11 +43,15 @@ class StatisticsFragment : AbstractFragment<StatisticsViewModel>(R.layout.fragme
             (getChildAt(6) as AppCompatTextView).text = "23.2"
         }
 
+        chart_container.setOnClickListener {
+            startActivity(Intent(requireActivity(), FullChartActivity::class.java))
+        }
+
     }
 
     override fun StatisticsViewModel.observeBlock() {
         mActualChartData.observe(viewLifecycleOwner) {
-            LineChartDrawer(this@StatisticsFragment).show(it)
+            ChartDrawer(chart, false).show(it)
         }
     }
 

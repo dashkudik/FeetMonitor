@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import dashkudov.feetmonitor.presentation.FullChartViewModel
 import dashkudov.feetmonitor.presentation.fragments.home.HomeViewModel
 import dashkudov.feetmonitor.presentation.fragments.settings.SettingsViewModel
 import dashkudov.feetmonitor.presentation.fragments.stats.StatisticsViewModel
@@ -25,5 +26,10 @@ abstract class AppViewModelBuilder {
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
     abstract fun bindSettingsViewModel(settingsViewModel: SettingsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FullChartViewModel::class)
+    abstract fun bindFullChartViewModel(fullChartViewModel: FullChartViewModel): ViewModel
 
 }
