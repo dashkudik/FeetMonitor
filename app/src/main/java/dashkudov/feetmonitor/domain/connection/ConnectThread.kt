@@ -3,7 +3,7 @@ package com.example.bluetoothcontroller
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.util.Log
-import com.example.bluetoothcontroller.MainActivity.Companion.UUID_STRING
+import dashkudov.feetmonitor.FeetMonitorApp.Companion.UUID_STRING
 import dashkudov.feetmonitor.domain.connection.ConnectedThread
 import java.io.IOException
 import java.util.*
