@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_categories"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="Категории: "
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_generate"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold_italic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/green"
+            android:text="Генерировать"
+            android:textAllCaps="false"
+            android:layout_margin="5dp"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/btn_generate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/green"
+            android:textSize="13sp"
+            android:text="Сбросить"
+            android:textAllCaps="false"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_generate"
+            android:id="@+id/btn_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.google.android.material.button.MaterialButton>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="10dp"
+            android:id="@+id/recycler_categories"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tags"
+            app:layout_constraintTop_toBottomOf="@id/recycler_categories"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="Тэги: "
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold_italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="6dp"
+            android:id="@+id/recycler_tags"
+            app:layout_constraintTop_toBottomOf="@id/tv_tags"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_generated"
+            app:layout_constraintTop_toBottomOf="@id/recycler_tags"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="Сгенерировано: "
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_bold_italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_generator"
+            android:isScrollContainer="false"
+            android:layout_margin="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_generated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

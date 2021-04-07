@@ -2,35 +2,42 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragment_home"
+    app:startDestination="@id/fragment_menu"
     android:id="@+id/navigation">
 
     <fragment
-        tools:layout="@layout/fragment_home"
-        android:name="dashkudov.feetmonitor.presentation.fragments.home.HomeFragment"
-        android:label="Home"
-        android:id="@+id/fragment_home">
+        tools:layout="@layout/fragment_my_orders"
+        android:name="com.example.green_deli.presentation.fragments.my_orders.MyOrdersFragment"
+        android:label="@string/my_orders"
+        android:id="@+id/fragment_my_orders">
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_statistics"
-        android:name="dashkudov.feetmonitor.presentation.fragments.stats.StatisticsFragment"
-        android:label="Statistics"
-        android:id="@+id/fragment_statistics">
-        <action
-            android:id="@+id/action_fragment_statistics_to_fragment_full_chart"
-            app:destination="@id/fragment_full_chart" />
+        tools:layout="@layout/fragment_menu"
+        android:name="com.example.green_deli.presentation.fragments.menu.MenuFragment"
+        android:label="@string/menu"
+        android:id="@+id/fragment_menu">
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_settings"
-        android:name="dashkudov.feetmonitor.presentation.fragments.settings.SettingsFragment"
-        android:label="Settings"
-        android:id="@+id/fragment_settings"></fragment>
+        tools:layout="@layout/fragment_basket"
+        android:name="com.example.green_deli.presentation.fragments.basket.BasketFragment"
+        android:label="@string/basket"
+        android:id="@+id/fragment_basket">
+    </fragment>
 
     <fragment
-        android:id="@+id/fragment_full_chart"
-        android:name="dashkudov.feetmonitor.presentation.fragments.full_chart.FullChartFragment"
-        tools:layout="@layout/fragment_full_chart"></fragment>
+        tools:layout="@layout/fragment_generator"
+        android:name="com.example.green_deli.presentation.fragments.generator.GeneratorFragment"
+        android:label="@string/generator"
+        android:id="@+id/fragment_generator">
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_profile"
+        android:name="com.example.green_deli.presentation.fragments.profile.ProfileFragment"
+        android:label="@string/profile"
+        android:id="@+id/fragment_profile">
+    </fragment>
 
 </navigation>

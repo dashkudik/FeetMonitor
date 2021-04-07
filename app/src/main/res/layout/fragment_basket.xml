@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_basket"
+        android:isScrollContainer="true"
+        android:layout_above="@id/btn_container"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/btn_container"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_clear"
+            android:layout_marginHorizontal="14dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="Очистить корзину"
+            app:strokeColor="@color/green"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginHorizontal="14dp"
+            android:text="Оформить заказ"
+            android:id="@+id/btn_create_order"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_weight="1"
+            app:strokeColor="@color/green"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+</RelativeLayout>

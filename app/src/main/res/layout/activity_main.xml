@@ -9,11 +9,12 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="dashkudov.feetmonitor.presentation.MainActivity">
+        tools:context=".presentation.MainActivity">
 
         <include layout="@layout/view_toolbar" />
 
         <fragment
+            android:layout_marginTop="4dp"
             android:id="@+id/fragment_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
@@ -35,13 +36,5 @@
             app:menu="@menu/main_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginTop="56dp"
-        android:indeterminate="true"
-        app:indicatorColor="@color/white"
-        app:trackColor="@color/purple" />
 </FrameLayout>
 

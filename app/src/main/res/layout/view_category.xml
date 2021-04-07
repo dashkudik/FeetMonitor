@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:drawableStart="@drawable/ic_baseline_food_bank_24"
+        android:id="@+id/tv_category"
+        android:drawablePadding="12dp"
+        android:textSize="17sp"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:textColor="@color/light_black"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="wrap_content"
+        android:layout_height="1px">
+    </View>
+
+</LinearLayout>
