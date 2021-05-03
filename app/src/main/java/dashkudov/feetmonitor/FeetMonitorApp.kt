@@ -15,6 +15,6 @@ class FeetMonitorApp : DaggerApplication() {
 
     companion object {
         const val UUID_STRING = "0000111e-0000-1000-8000-00805f9b34fb"
-        const val NAME = "Dima"
+        const val NAME = "Serv_7"
     }
 }

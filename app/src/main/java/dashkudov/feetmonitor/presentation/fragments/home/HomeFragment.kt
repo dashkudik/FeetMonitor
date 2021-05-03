@@ -1,5 +1,8 @@
 package dashkudov.feetmonitor.presentation.fragments.home
 
+import android.content.Intent
+import android.net.Uri
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.feetmonitor.R
@@ -34,6 +37,23 @@ class HomeFragment : AbstractFragment<HomeViewModel>(R.layout.fragment_home) {
                 this,
                 DISEASE_2_URLS
             ) { url, _ -> PagerImageFragment.newInstance(url) }
+
+        root
+            .getChildAt(0)
+            .findViewById<TextView>(R.id.tvMoreInfo).setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://7010303.ru/zabolevanija/ploskostopie/")
+                })
+            }
+
+        root
+            .getChildAt(1)
+            .findViewById<TextView>(R.id.tvMoreInfo).setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data =
+                        Uri.parse("https://kladzdor.ru/articles/poleznye-zametki-o-zdorove/Artrit_stopy%3A_simptomy_i_lechenie/")
+                })
+            }
     }
 
     override fun HomeViewModel.observeBlock() {
@@ -51,8 +71,8 @@ class HomeFragment : AbstractFragment<HomeViewModel>(R.layout.fragment_home) {
             "https://admin.cgon.ru/storage/upload/medialibrary/7a0d4a1fc8afe59f06e79f90df6fab51.png"
         )
         val DISEASE_2_URLS = mutableListOf(
-            "https://lh3.googleusercontent.com/proxy/8_EexS49eyHpgE7_gosxCjerdbGPzdpYxs3yGZ-hBdm7JYEQwRaEjk10I84Mlc4bjqwD3whIRxQ69Q",
             "https://www.power911.ru/media/k2/items/cache/621af29360685f88fae4c26f96ed9d8c_XL.jpg",
+            "https://www.geromed.ru/upload/medialibrary/e28/e28ffb8bbd8b16d1901939a4fa9a8517.jpg",
         )
     }
 }

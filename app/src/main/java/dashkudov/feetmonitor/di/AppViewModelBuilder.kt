@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dashkudov.feetmonitor.presentation.FullChartViewModel
+import dashkudov.feetmonitor.presentation.MainViewModel
 import dashkudov.feetmonitor.presentation.fragments.home.HomeViewModel
 import dashkudov.feetmonitor.presentation.fragments.settings.SettingsViewModel
 import dashkudov.feetmonitor.presentation.fragments.stats.StatisticsViewModel
@@ -32,4 +33,8 @@ abstract class AppViewModelBuilder {
     @ViewModelKey(FullChartViewModel::class)
     abstract fun bindFullChartViewModel(fullChartViewModel: FullChartViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 }
