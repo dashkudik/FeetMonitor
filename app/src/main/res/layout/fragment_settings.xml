@@ -25,18 +25,21 @@
             android:background="#434343" />
 
         <dashkudov.feetmonitor.presentation.custom.SettingsButton
+            android:id="@+id/btn_fullscreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_fullscreen"
             android:text="Полноэкранный режим" />
 
         <dashkudov.feetmonitor.presentation.custom.SettingsButton
+            android:id="@+id/btn_notifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_notifications"
             android:text="Уведомления" />
 
         <dashkudov.feetmonitor.presentation.custom.SettingsButton
+            android:id="@+id/btn_autoconnection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:icon="@drawable/icon_auto_reconnection"

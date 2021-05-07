@@ -16,6 +16,7 @@ import com.example.feetmonitor.R
 import dagger.android.support.DaggerAppCompatActivity
 import dashkudov.feetmonitor.Constants
 import dashkudov.feetmonitor.Constants.MAC
+import dashkudov.feetmonitor.gateway.AppRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 import kotlinx.coroutines.CoroutineScope
@@ -39,10 +40,12 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        appRepository.context = applicationContext
         mainViewModel.notifyBluetoothIsEnabled(bluetooth.isEnabled)
 
         with(mainViewModel) {
             connectionSuccessful.observe(this@MainActivity) {
+                notifyItIsLoading(false)
                 if (it) {
                     Toast.makeText(applicationContext, "Успешно подключено", Toast.LENGTH_SHORT)
                         .show()
@@ -91,6 +94,21 @@ class MainActivity : DaggerAppCompatActivity() {
                 startActivityForResult(enableBtIntent, Constants.BLUETOOTH_REQUEST_CODE)
             }
         }
+
+        if (appRepository.getAutoconnection()) {
+            if (bluetooth.isEnabled) {
+                if (mainViewModel.connectionSuccessful.value != true) {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        BluetoothAdapter.getDefaultAdapter().bondedDevices.find {
+                            it.address == MAC
+                        }?.connect() ?: mainViewModel.notifyConnectionWasSuccessful(false)
+                    }
+                }
+            } else {
+                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                startActivityForResult(enableBtIntent, Constants.BLUETOOTH_REQUEST_CODE)
+            }
+        }
     }
 
     private suspend fun BluetoothDevice.connect() {
@@ -134,5 +152,9 @@ class MainActivity : DaggerAppCompatActivity() {
                 }?.connect() ?: mainViewModel.notifyConnectionWasSuccessful(false)
             }
         }
+    }
+
+    companion object {
+        val appRepository = AppRepositoryImpl()
     }
 }
