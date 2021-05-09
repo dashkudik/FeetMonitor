@@ -26,8 +26,8 @@ class GetLastChartDataUseCase @Inject constructor(
         )
     }
 
-    private fun generateRandomList(minutes: Int): List<Float> {
-        return ArrayList<Float>().apply {
+    private fun generateRandomList(minutes: Int): MutableList<Float> {
+        return mutableListOf<Float>().apply {
             (0 until minutes * 60).forEach {
                 val randomValue = (Math.random() * 90).toFloat() + 70
                 add(randomValue)

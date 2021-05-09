@@ -15,12 +15,17 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.feetmonitor.R
 import dagger.android.support.DaggerAppCompatActivity
 import dashkudov.feetmonitor.Constants
+import dashkudov.feetmonitor.Constants.CHART_ENTRIES_AMOUNT
 import dashkudov.feetmonitor.Constants.MAC
+import dashkudov.feetmonitor.Constants.create
+import dashkudov.feetmonitor.data.entities.chart.ChartData
+import dashkudov.feetmonitor.data.objects.foot.DataSet
 import dashkudov.feetmonitor.gateway.AppRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -33,7 +38,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val bluetooth = BluetoothAdapter.getDefaultAdapter()
 
     val mainViewModel by lazy {
-        viewModelFactory.create(MainViewModel::class.java)
+        viewModelFactory.create(this, MainViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,15 +129,40 @@ class MainActivity : DaggerAppCompatActivity() {
                 val inStream = socket.inputStream
                 val buffer = ByteArray(1024)
                 withContext(Dispatchers.IO) {
-                    while (true) {
-                        try {
-                            inStream.read(buffer)
-                        } catch (e: IOException) {
-                            mainViewModel.notifyConnectionWasSuccessful(false)
-                            Log.i("TEST", "LOST")
-                            break
+                    flow {
+                        var temp = ChartData(
+                            bottomFootPartDataSet = object : DataSet {
+                                override var dataSet = mutableListOf<Float>()
+                            }, internalFootPartDataSet = object : DataSet {
+                                override var dataSet = mutableListOf<Float>()
+                            }, externalFootPartDataSet = object : DataSet {
+                                override var dataSet = mutableListOf<Float>()
+                            })
+                        while (true) {
+                            try {
+                                inStream.read(buffer)
+                            } catch (e: IOException) {
+                                mainViewModel.notifyConnectionWasSuccessful(false)
+                                Log.i("TEST", "LOST")
+                                break
+                            }
+                            buffer.decodeToString().takeIf { it.length > 4 }?.let {
+                                val data = it.substring(4 until it.length).toFloat()
+                                val index = it[2].toInt()
+                                if (temp.externalFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT &&
+                                    temp.internalFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT &&
+                                    temp.bottomFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT
+                                ) {
+                                    temp.processData(index, data)
+                                    Log.i("TEST_", temp.toString())
+                                } else {
+                                    emit(temp)
+                                    Log.i("TEST_", "NICE ---> ${temp}")
+                                    temp.clear()
+                                }
+                                Log.i("TEST", "GET: ${buffer.decodeToString()}")
+                            }
                         }
-                        Log.i("TEST", "GET: ${buffer.decodeToString()}")
                     }
                 }
             } catch (e: Throwable) {
@@ -141,6 +171,21 @@ class MainActivity : DaggerAppCompatActivity() {
             }
         }
     }
+
+    private fun ChartData.processData(index: Int, data: Float) {
+        when (index) {
+            1, 2, 3 -> bottomFootPartDataSet.dataSet.add(data)
+            4, 5, 6 -> internalFootPartDataSet.dataSet.add(data)
+            7, 8 -> externalFootPartDataSet.dataSet.add(data)
+        }
+    }
+
+    private fun ChartData.clear() {
+        this.bottomFootPartDataSet.dataSet.clear()
+        this.internalFootPartDataSet.dataSet.clear()
+        this.externalFootPartDataSet.dataSet.clear()
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

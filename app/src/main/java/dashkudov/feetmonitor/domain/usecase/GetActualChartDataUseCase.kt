@@ -25,8 +25,8 @@ class GetActualChartDataUseCase @Inject constructor(
         )
     }
 
-    private fun generateRandomList(): List<Float> {
-        return ArrayList<Float>().apply {
+    private fun generateRandomList(): MutableList<Float> {
+        return mutableListOf<Float>().apply {
             (0 until CHART_ENTRIES_AMOUNT).forEach {
                 val randomValue = (Math.random() * 90).toFloat() + 70
                 add(randomValue)

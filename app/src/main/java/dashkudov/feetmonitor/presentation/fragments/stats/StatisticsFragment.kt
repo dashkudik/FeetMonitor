@@ -4,15 +4,24 @@ import android.content.Intent
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.example.feetmonitor.R
+import dashkudov.feetmonitor.Constants.create
 import dashkudov.feetmonitor.presentation.FullChartActivity
+import dashkudov.feetmonitor.presentation.MainViewModel
 import dashkudov.feetmonitor.presentation.custom.ChartDrawer
 import dashkudov.feetmonitor.presentation.fragments.AbstractFragment
 import kotlinx.android.synthetic.main.fragment_statistics.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class StatisticsFragment : AbstractFragment<StatisticsViewModel>(R.layout.fragment_statistics) {
     override val viewModel by lazy {
         createViewModel<StatisticsViewModel>()
+    }
+
+    private val mainViewModel by lazy {
+        viewModelFactory.create(requireActivity(), MainViewModel::class.java)
     }
 
     override fun fragmentBlock() {
@@ -46,12 +55,19 @@ class StatisticsFragment : AbstractFragment<StatisticsViewModel>(R.layout.fragme
         chart_container.setOnClickListener {
             startActivity(Intent(requireActivity(), FullChartActivity::class.java))
         }
-
     }
 
     override fun StatisticsViewModel.observeBlock() {
         mActualChartData.observe(viewLifecycleOwner) {
             ChartDrawer(chart, false).show(it)
+        }
+        mainViewModel.chartDataFlow.observe(viewLifecycleOwner) {
+            MainScope().launch {
+                it?.collect {
+                    chart.invalidate()
+                    ChartDrawer(chart, false).show(it)
+                }
+            }
         }
     }
 

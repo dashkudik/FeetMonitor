@@ -2,12 +2,18 @@ package dashkudov.feetmonitor.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dashkudov.feetmonitor.data.entities.chart.ChartData
 import dashkudov.feetmonitor.domain.usecase.GetLastChartDataUseCase
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val getLastChartDataUseCase: GetLastChartDataUseCase
 ) : ViewModel() {
+
+    val chartDataFlow: MutableLiveData<Flow<ChartData>?> by lazy {
+        MutableLiveData<Flow<ChartData>?>()
+    }
 
     val connectionSuccessful by lazy {
         MutableLiveData<Boolean>()
