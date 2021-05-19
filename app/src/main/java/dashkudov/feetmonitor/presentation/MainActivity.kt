@@ -15,19 +15,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.feetmonitor.R
 import dagger.android.support.DaggerAppCompatActivity
 import dashkudov.feetmonitor.Constants
-import dashkudov.feetmonitor.Constants.CHART_ENTRIES_AMOUNT
 import dashkudov.feetmonitor.Constants.MAC
 import dashkudov.feetmonitor.Constants.create
 import dashkudov.feetmonitor.data.entities.chart.ChartData
-import dashkudov.feetmonitor.data.objects.foot.DataSet
 import dashkudov.feetmonitor.gateway.AppRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_toolbar.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
 
@@ -37,10 +32,13 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val bluetooth = BluetoothAdapter.getDefaultAdapter()
 
+    lateinit var flow: Flow<ChartData>
+
     val mainViewModel by lazy {
         viewModelFactory.create(this, MainViewModel::class.java)
     }
 
+    @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -116,6 +114,7 @@ class MainActivity : DaggerAppCompatActivity() {
         }
     }
 
+    @InternalCoroutinesApi
     private suspend fun BluetoothDevice.connect() {
         val uuid = uuids[0].uuid
         val socket = createRfcommSocketToServiceRecord(uuid)
@@ -128,46 +127,15 @@ class MainActivity : DaggerAppCompatActivity() {
                 Log.i("TEST", "SUCCESS")
                 val inStream = socket.inputStream
                 val buffer = ByteArray(1024)
-                withContext(Dispatchers.IO) {
-                    flow {
-                        var temp = ChartData(
-                            bottomFootPartDataSet = object : DataSet {
-                                override var dataSet = mutableListOf<Float>()
-                            }, internalFootPartDataSet = object : DataSet {
-                                override var dataSet = mutableListOf<Float>()
-                            }, externalFootPartDataSet = object : DataSet {
-                                override var dataSet = mutableListOf<Float>()
-                            })
-                        while (true) {
-                            try {
-                                inStream.read(buffer)
-                            } catch (e: IOException) {
-                                mainViewModel.notifyConnectionWasSuccessful(false)
-                                Log.i("TEST", "LOST")
-                                break
-                            }
-                            buffer.decodeToString().takeIf { it.length > 4 }?.let {
-                                val data = it.substring(4 until it.length).toFloat()
-                                val index = it[2].toInt()
-                                if (temp.externalFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT &&
-                                    temp.internalFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT &&
-                                    temp.bottomFootPartDataSet.dataSet.size != CHART_ENTRIES_AMOUNT
-                                ) {
-                                    temp.processData(index, data)
-                                    Log.i("TEST_", temp.toString())
-                                } else {
-                                    emit(temp)
-                                    Log.i("TEST_", "NICE ---> ${temp}")
-                                    temp.clear()
-                                }
-                                Log.i("TEST", "GET: ${buffer.decodeToString()}")
-                            }
-                        }
+                while (true) {
+                    try {
+                        inStream.read(buffer)
+                    } catch (e: IOException) {
+                        mainViewModel.notifyConnectionWasSuccessful(false)
+                        break
                     }
                 }
-            } catch (e: Throwable) {
-                mainViewModel.notifyConnectionWasSuccessful(false)
-                Log.i("TEST", e.message!!)
+            } catch (e: Exception) {
             }
         }
     }
@@ -187,14 +155,17 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
 
+    @InternalCoroutinesApi
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Constants.BLUETOOTH_REQUEST_CODE && resultCode != RESULT_CANCELED) {
+        if (requestCode == Constants.BLUETOOTH_REQUEST_CODE && resultCode != RESULT_CANCELED) {
             mainViewModel.notifyBluetoothIsEnabled(true)
-            CoroutineScope(Dispatchers.Default).launch {
-                BluetoothAdapter.getDefaultAdapter().bondedDevices.find {
-                    it.address == MAC
-                }?.connect() ?: mainViewModel.notifyConnectionWasSuccessful(false)
+            if (appRepository.getAutoconnection()) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    BluetoothAdapter.getDefaultAdapter().bondedDevices.find {
+                        it.address == MAC
+                    }?.connect() ?: mainViewModel.notifyConnectionWasSuccessful(false)
+                }
             }
         }
     }
