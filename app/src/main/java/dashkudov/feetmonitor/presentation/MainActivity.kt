@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -124,7 +123,6 @@ class MainActivity : DaggerAppCompatActivity() {
                 socket.connect()
                 mainViewModel.notifyItIsLoading(false)
                 mainViewModel.notifyConnectionWasSuccessful(true)
-                Log.i("TEST", "SUCCESS")
                 val inStream = socket.inputStream
                 val buffer = ByteArray(1024)
                 while (true) {
@@ -136,6 +134,7 @@ class MainActivity : DaggerAppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
+                mainViewModel.notifyConnectionWasSuccessful(false)
             }
         }
     }
